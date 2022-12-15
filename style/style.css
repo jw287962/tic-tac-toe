@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'roboto';
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+:root{
+    --ticHeight: 300px;
+    --ticWidth: 200px;
+    --ticborder: 5px solid rgb(117, 117, 117);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header{
+    height: 100px;
+
+  
+}
+.gamestats{
+    height: 100px;
+}
+.body{
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+ 
+
+}
+
+.col{
+  
+    display: grid;
+    height: var(--ticHeight);
+    width: var(--ticWidth);
+}
+
+.rowleft,.rowright{
+    border: var(--ticborder);
+    border-left: none;
+    border-right: none;
+   
+}
+
+.rowmiddle,.rowmiddleb{
+    border: var(--ticborder);
+    border-top: none;;
+    
+}
+.rowmiddleb{
+    border-bottom: none;;
+}
