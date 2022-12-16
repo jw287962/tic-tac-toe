@@ -79,7 +79,7 @@ button{
 }
  .clicked{
     display: grid;
-    font-size: 150px;
+    font-size: 10rem;
  
    
 }
