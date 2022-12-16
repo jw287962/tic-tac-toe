@@ -12,7 +12,7 @@ const displayController = (() =>{
     function findWinner(playerHolder){
         for(let i = 0; i <7; i++){   
         //   checks row
-            if(playerHolder.includes(i) && 
+            if((i%3) === 0 && playerHolder.includes(i) && 
             playerHolder.includes(i+1) && playerHolder.includes(i+2)){
                 return true;
             }
@@ -211,14 +211,14 @@ ticButton.addEventListener('click',e =>{
     }
     turn++;
     ticButton.classList.add('clicked');
-    
+    findActiveLine();
     if(turn === 10){
         setTimeout(() => {
             gameBoard.restart()
         },1000);
         turn =1;
     }
-    findActiveLine();
+   
 
 
 });
