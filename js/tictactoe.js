@@ -26,8 +26,8 @@ const displayController = (() =>{
             playerHolder.includes(i+4) && playerHolder.includes(i+8)){
                 return true;
             }
-            if(playerHolder.includes(i) && 
-            playerHolder.includes(i+2) && playerHolder.includes(i+4)){
+            if(playerHolder.includes(3) && 
+            playerHolder.includes(5) && playerHolder.includes(7)){
                 return true;
             }
          
