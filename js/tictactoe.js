@@ -154,6 +154,13 @@ ticButton.addEventListener('click',e =>{
     }
     turn++;
     ticButton.classList.add('clicked');
+    console.log(turn);
+    if(turn === 10){
+        setTimeout(() => {
+            gameBoard.restart()
+        },1000);
+        turn =1;
+    }
 });
 
 // determine winner
@@ -165,12 +172,11 @@ if(turn >=3){
     }
 }
 
-
-
 restartButton.addEventListener('click', e =>{
 gameBoard.restart();
     
 });
+
 
 
 
