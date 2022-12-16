@@ -11,48 +11,59 @@
 <body>
     <div class="container">
     <div class="header">
-
+        <h1>TIC TAC TOE</h1>
     </div>
     <div class="gamestats">
-
+        <div class="flexrow">
+            <p>Player 1</p>
+            <p class="player active" id="one"><span>X</span></p>
+        </div>
+        <div class="flexrow">
+            <p>Player 2</p>
+            <p class="player" id="two">O</p>
+        </div>
+      
     </div>
 
-    <div class="body">
-            <div class="col">
-                <button class="rowemtpy " id="0">
-               
-                </button>
-                <button class="rowleft" id="3">
-                  
-                </button>
-                <button class="rowemtpy"  id="6">
-               
-                </button>
-            </div>
-            <div class="col">
-                <button class="rowmiddleb" id="1">
-                  
-                </button>
-                <button class="rowmiddle" id="4">
-
-                </button>
-                <button class="rowmiddleb" id="7">
-
-                </button>
-            </div>
-            <div class="col">
-                <button class="rowemtpy" id="2">
+        <div class="body">
+                <div class="col">
+                    <button class="rowemtpy" id="0">
+                
+                    </button>
+                    <button class="rowleft" id="3">
                     
-                </button>
-                <button class="rowright" id="5">
+                    </button>
+                    <button class="rowemtpy"  id="6">
+                
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="rowmiddleb" id="1">
+                    
+                    </button>
+                    <button class="rowmiddle" id="4">
 
-                </button>
-                <button class="rowemtpy" id="8">
+                    </button>
+                    <button class="rowmiddleb" id="7">
 
-                </button>
-            </div>
-            
-    </div>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="rowemtpy" id="2">
+                        
+                    </button>
+                    <button class="rowright" id="5">
+
+                    </button>
+                    <button class="rowemtpy" id="8">
+
+                    </button>
+                </div>
+               
+        </div>
+        <div class="footer">
+            <div><input type="button" class="restart" value="Restart Game"></input></div>
+        </div>
     </div>
 
 </body>

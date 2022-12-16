@@ -2,30 +2,49 @@
     font-family: 'roboto';
     src: url(../fonts/Roboto-Regular.ttf);
 }
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Bold.ttf');
+    font-weight: bold;
+}
 :root{
     --ticHeight: 400px;
     --ticWidth: 200px;
     --ticborder: 5px solid rgb(117, 117, 117);
 }
 .container{
+    font-family: 'roboto',Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: larger;
+    font-weight: bold;
 }
 .header{
+    display: flex;
+    justify-content: center;
     height: 100px;
-
-  
+    box-shadow: 0.3em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+  width: 100vw;
 }
 .gamestats{
-    height: 100px;
+    height: 60px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+  
 }
 .body{
     
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
- 
+    display: flex;
+    min-height: 550px;
 
+}
+.flexrow{
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-wrap: row;
 }
 
 .col{
@@ -53,16 +72,39 @@
 }
 
 
- button{
+button{
     border: none;
     position: relative;
     min-height: 180px;
-  
-
 }
  .clicked{
     display: grid;
     font-size: 150px;
  
    
+}
+
+ .restart{
+    border-radius: 10px;
+    height: 50px;
+    margin: 10px;
+    border: 1px solid rgb(255, 147, 147);;
+    background-color: rgb(255, 147, 147);
+    font-weight: bold;
+    font-size: large;
+}
+
+p.player{
+   background-color: rgb(0, 0, 0);
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 10px;
+    margin: 10px;
+    color: rgb(255, 255, 255);
+    height: min-content;
+  width: 100px;
+}
+
+p.active{
+    border: 3px solid green;
 }

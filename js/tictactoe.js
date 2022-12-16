@@ -56,18 +56,43 @@ function createBoard(){
             }
 }
 function updateBoard(num,player){
-    gameBoard.getBoard()[num].setClickTrue(player);
+    
+
+        gameBoard.getBoard()[num].setClickTrue(player);
+
+
+    
 }   
 function getBoard(){
     return board;
 
+}
+
+function restart(){
+
+    let ticButtons = document.querySelectorAll('button');
+   
+    for(let i = 0; i<9; i++){
+        
+        board.pop();
+     
+    }
+    for(const ticButton of ticButtons){
+        ticButton.textContent='';
+    }
+    turn=1;
+    playerTwoHTML.classList.remove('active');
+    playerOneHTML.classList.add('active');
+    createBoard();
+
+    
 }
 // starting game
     
     // console.log(startGame.getBoardRow());
 
 
-    return {updateBoard, getBoard, createBoard};
+    return {updateBoard, getBoard, createBoard,restart};
 })();
 
 
@@ -100,33 +125,52 @@ gameBoard.createBoard();
 
  
 let ticButtons = document.querySelectorAll('button');
+let playerOneHTML = document.getElementById("one");
+let playerTwoHTML = document.getElementById("two");
 
+let restartButton = document.querySelector('.restart');
+//UPDATES BOARD UPON CLICK OF BUTTONS IN BROWSER. 
 for(const ticButton of ticButtons)
 ticButton.addEventListener('click',e =>{
-
+    playerOneHTML.classList.remove('active');
+    playerTwoHTML.classList.remove('active');
     var num=  ticButton.id
-    if((turn % 2) === 0){
-     
-        gameBoard.updateBoard(num,player2.getPlayerNumber());
-        ticButton.textContent = player2.getPlayerNumber();
-        console.log( player1.getPlayerNumber());
+    if(gameBoard.getBoard()[num].getClicked()){
+        console.log(gameBoard.getBoard()[num].getClicked());
+        turn--;
+    }
+
+   else if((turn % 2) === 0){
+    
+    gameBoard.updateBoard(num,player1.getPlayerNumber());
+    ticButton.textContent = player1.getPlayerNumber();
+    playerOneHTML.classList.add('active');
      }
     else{
-     
-        gameBoard.updateBoard(num,player1.getPlayerNumber());
-        ticButton.textContent = player1.getPlayerNumber();
-       
+        
+        gameBoard.updateBoard(num,player2.getPlayerNumber());
+        ticButton.textContent = player2.getPlayerNumber();
+        playerTwoHTML.classList.add('active');
     }
     turn++;
     ticButton.classList.add('clicked');
-     
 });
 
+// determine winner
+
+if(turn >=3){
+    for(let i =0;i<=9;i++){
+        
+
+    }
+}
 
 
 
-
-
+restartButton.addEventListener('click', e =>{
+gameBoard.restart();
+    
+});
 
 
 
