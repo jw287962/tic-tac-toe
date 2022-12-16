@@ -3,7 +3,7 @@
     src: url(../fonts/Roboto-Regular.ttf);
 }
 :root{
-    --ticHeight: 300px;
+    --ticHeight: 400px;
     --ticWidth: 200px;
     --ticborder: 5px solid rgb(117, 117, 117);
 }
@@ -44,9 +44,25 @@
 
 .rowmiddle,.rowmiddleb{
     border: var(--ticborder);
-    border-top: none;;
+ 
     
 }
 .rowmiddleb{
+    border-top: none;;
     border-bottom: none;;
+}
+
+
+ button{
+    border: none;
+    position: relative;
+    min-height: 180px;
+  
+
+}
+ .clicked{
+    display: grid;
+    font-size: 150px;
+ 
+   
 }
