@@ -8,10 +8,10 @@
 
 const displayController = (() =>{
     //need to alternate between characters
-    var turn = 1;
+    let turn = 0;
     let bodyHTML = document.querySelector('.winnertext');
     function findActiveLine(){
-   
+        let winnerFound = false;
         let numberofwinsOne = document.querySelector('.numberofwinsone');
         let numberofwinsTwo = document.querySelector('.numberofwinstwo');
         const playerOneHolder = [];
@@ -27,7 +27,7 @@ const displayController = (() =>{
                 if(gameBoard.getBoard()[i].getClicked())
                 playerTwoHolder.push(i);
             }    } 
-            if(turn >=3){
+            
                 // CHECKS IF WON in findWinner 
             if(findWinner(playerOneHolder)){
                 bodyHTML.classList.add('result');
@@ -39,8 +39,9 @@ const displayController = (() =>{
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 1 is Winner!";
-                
+                winnerFound = true;
                 gameBoard.restart();
+               
             }
             else if(findWinner(playerTwoHolder)){
                 bodyHTML.classList.add('result');
@@ -51,15 +52,14 @@ const displayController = (() =>{
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 2 is Winner!";
-               
+                winnerFound = true;
                 gameBoard.restart()
-            }
+               
            
-            
             }
-           
+            return winnerFound;
     
-        
+             
            
             // gameBoard.restart();
             }
@@ -125,8 +125,7 @@ function restart(){
     }
     
     let ticButtons = document.querySelectorAll('button');
-    turn=0;
-
+  
     for(let i = 0; i<9; i++){
         board.pop();
      
@@ -144,6 +143,7 @@ function restart(){
     bodyHTML.classList.remove('result');
 },1000);
   
+turn=0;
 
 }
     return {board, updateBoard, getBoard, createBoard,restart};
@@ -202,7 +202,7 @@ const player = (number) =>{
 //players and board initiated 
 const player1 = player(1);
 const player2 = player(2);
-gameBoard.createBoard();
+
 
  
 let ticButtons = document.querySelectorAll('button');
@@ -222,11 +222,12 @@ ticButton.addEventListener('click', playGame);
 
 
 function playGame(){
-  
-if(turn === 0){
-    gameBoard.createBoard();
-    turn++
-}
+    console.log(turn);
+    if(turn === 0){
+        console.log('created new gameBoard');
+        gameBoard.createBoard();
+        turn++
+    }
 if(bodyHTML.textContent === ""){
  
     playerOneHTML.classList.remove('active');
@@ -237,24 +238,43 @@ if(bodyHTML.textContent === ""){
 // if against AI
 
 if(gameBoard.getBoard()[num].getClicked()){
-    if(turn === 1)
-    {
-        turn =2;
-    }   else{
-        turn =1;
-    }
+   
 }
-   
-  else if(player2.isAI()){
 
+  else if(player2.isAI()){
+  
+    
     updateCurrentGame(player1,num);
-   
-findActiveLine();
-    num = findBox();
-    ticButtonID = document.getElementById(`${num}`);
-    updateCurrentGame(player2,num,ticButtonID);  
+
+ 
+    
+    if(findActiveLine()){
+        turn = 0;
+        console.log(turn);
+       
+
+    } 
+    else{
+        num = findBox();
+        ticButtonID = document.getElementById(`${num}`);
+        updateCurrentGame(player2,num,ticButtonID);  
         
-    findActiveLine();
+        if(findActiveLine()){
+            turn = 0;
+        
+            console.log(turn);
+        }
+        
+    }
+  
+
+   
+
+  
+
+
+ 
+   
 } 
 
 // if against human
@@ -274,12 +294,12 @@ else{
     updateCurrentGame(player1,num);
       
    }
-
+   turn++;
 findActiveLine();
 }
 
 
-turn++;
+
 
     
    if(turn === 10){
@@ -323,7 +343,7 @@ function findBox(){
 }
 
 }
-}
+
 
 function findWinner(playerHolder){
     for(let i = 0; i <7; i++){   
@@ -348,7 +368,7 @@ function findWinner(playerHolder){
         }
      
 }     
-}
+}}
 
 restartButton.addEventListener('click', e =>{
 gameBoard.restart();
@@ -372,7 +392,7 @@ vsAI.addEventListener('click', e =>{
     });
 
 
-
+   
 
 
 
