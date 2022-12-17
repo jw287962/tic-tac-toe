@@ -30,6 +30,7 @@ const displayController = (() =>{
             if(turn >=3){
                 // CHECKS IF WON in findWinner 
             if(findWinner(playerOneHolder)){
+                bodyHTML.classList.add('result');
                 player1.isWinner(); 
              
                 numberofwinsOne.textContent =  `${player1.numberWins()}`;
@@ -38,9 +39,11 @@ const displayController = (() =>{
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 1 is Winner!";
+                
                 gameBoard.restart();
             }
             else if(findWinner(playerTwoHolder)){
+                bodyHTML.classList.add('result');
                 player2.isWinner(); 
                 numberofwinsTwo.textContent =  `${player2.numberWins()}`;
                 setTimeout(() => {
@@ -48,6 +51,7 @@ const displayController = (() =>{
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 2 is Winner!";
+               
                 gameBoard.restart()
             }
            
@@ -114,8 +118,10 @@ function getBoard(){
 }
 
 function restart(){
+    
     if((bodyHTML.textContent === "")){
         bodyHTML.textContent ="RESTARTING GAME!";
+        bodyHTML.classList.add('result');
     }
     
     let ticButtons = document.querySelectorAll('button');
@@ -135,7 +141,7 @@ function restart(){
     playerTwoHTML.classList.remove('active');
     playerOneHTML.classList.add('active');
     bodyHTML.textContent = "";
-   
+    bodyHTML.classList.remove('result');
 },1000);
   
 
@@ -204,6 +210,7 @@ if(turn === 0){
     turn++
 }
 if(bodyHTML.textContent === ""){
+ 
     playerOneHTML.classList.remove('active');
    playerTwoHTML.classList.remove('active');
    var num = ticButton.id;
@@ -237,7 +244,9 @@ if(bodyHTML.textContent === ""){
        turn =0;
    }
   
-}}
+}
+
+}
 }
 
 function findWinner(playerHolder){
