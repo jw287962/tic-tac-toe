@@ -157,17 +157,18 @@ function restart(){
 
 const player = (number) =>{
     let shape;
+    let ai= false;
     if(number === 1){
-        shape = 'O';
+        shape = 'X';
     }
     else {
-        shape = 'X';
+        shape = 'O';
     }
     let winner = false;
         let wins = 0;
     const playerNumber = shape;
   
-    function getPlayerNumber(){
+    function getPlayerShape(){
         return playerNumber;
     }
     function isWinner(){
@@ -177,7 +178,21 @@ const player = (number) =>{
     function numberWins(){
         return wins;
     }
-    return {getPlayerNumber,isWinner,numberWins};
+    function isAI(){
+        return ai;
+    }
+    function setAI(){
+        ai = true;
+        // if(ai === false){
+          
+        // }
+        // else ai = false;
+         }
+
+    function setHuman(){
+        ai = false;
+    }
+    return {getPlayerShape,isWinner,numberWins,isAI,setAI,setHuman};
 
 
     
@@ -195,6 +210,8 @@ let playerOneHTML = document.getElementById("one");
 let playerTwoHTML = document.getElementById("two");
 
 let restartButton = document.querySelector('.restart');
+let vsAI = document.querySelector('.vsAI');
+let vsHuman = document.querySelector('.vsHuman');
 //UPDATES BOARD UPON CLICK OF BUTTONS IN BROWSER. 
 
 
@@ -203,8 +220,9 @@ for(const ticButton of ticButtons){
 ticButton.addEventListener('click', playGame);
 
 
-function playGame(){
 
+function playGame(){
+  
 if(turn === 0){
     gameBoard.createBoard();
     turn++
@@ -213,28 +231,56 @@ if(bodyHTML.textContent === ""){
  
     playerOneHTML.classList.remove('active');
    playerTwoHTML.classList.remove('active');
-   var num = ticButton.id;
+   let num = ticButton.id;
 
-   if(gameBoard.getBoard()[num].getClicked()){
+   
+// if against AI
+
+if(gameBoard.getBoard()[num].getClicked()){
+    if(turn === 1)
+    {
+        turn =2;
+    }   else{
+        turn =1;
+    }
+}
+   
+  else if(player2.isAI()){
+
+    updateCurrentGame(player1,num);
+   
+findActiveLine();
+    num = findBox();
+    ticButtonID = document.getElementById(`${num}`);
+    updateCurrentGame(player2,num,ticButtonID);  
+        
+    findActiveLine();
+} 
+
+// if against human
+else{
+    if(gameBoard.getBoard()[num].getClicked()){
       
-       turn--;
-   }
+        turn--;
+    }
 
   else if((turn % 2) === 0){
- 
-   gameBoard.updateBoard(num,player1.getPlayerNumber());
-   ticButton.textContent = player1.getPlayerNumber();
-   playerOneHTML.classList.add('active');
+   
+    updateCurrentGame(player2,num);
+    
     }
    else{
     
-       gameBoard.updateBoard(num,player2.getPlayerNumber());
-       ticButton.textContent = player2.getPlayerNumber();
-       playerTwoHTML.classList.add('active');
+    updateCurrentGame(player1,num);
+      
    }
-   turn++;
-   ticButton.classList.add('clicked');
-    findActiveLine();
+
+findActiveLine();
+}
+
+
+turn++;
+
     
    if(turn === 10){
        setTimeout(() => {
@@ -244,6 +290,36 @@ if(bodyHTML.textContent === ""){
        turn =0;
    }
   
+}
+
+function updateCurrentGame(player,num,ticButtonID){
+    gameBoard.updateBoard(num,player.getPlayerShape());
+    if(ticButtonID){
+        ticButtonID.textContent = player.getPlayerShape();
+        ticButtonID.classList.add('clicked');
+    }else{
+        ticButton.textContent = player.getPlayerShape();
+        ticButton.classList.add('clicked');
+    }
+   
+   
+    if(player.getPlayerShape() === 'X'){
+        playerOneHTML.classList.add('active');   
+    }else{
+        playerTwoHTML.classList.add('active');    
+    }
+}
+
+function findBox(){
+    let num = Math.floor(Math.random() * 9);
+
+    while(gameBoard.getBoard()[num].getClicked()){
+        num = Math.floor(Math.random() * 9);
+       
+ 
+    }
+
+    return num;
 }
 
 }
@@ -280,6 +356,20 @@ console.log("restart button clicked");
 
     
 });
+
+vsHuman.addEventListener('click', e =>{
+    gameBoard.restart();
+    console.log("restarting against Human");
+ 
+    player2.setHuman();
+    });
+  
+vsAI.addEventListener('click', e =>{
+    gameBoard.restart();
+    console.log("restarting against AI");
+    player2.setAI();
+        
+    });
 
 
 
