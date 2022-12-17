@@ -9,9 +9,9 @@
 const displayController = (() =>{
     //need to alternate between characters
     var turn = 1;
-    
+    let bodyHTML = document.querySelector('.winnertext');
     function findActiveLine(){
-        let bodyHTML = document.querySelector('.winnertext');
+   
         let numberofwinsOne = document.querySelector('.numberofwinsone');
         let numberofwinsTwo = document.querySelector('.numberofwinstwo');
         const playerOneHolder = [];
@@ -27,7 +27,7 @@ const displayController = (() =>{
                 if(gameBoard.getBoard()[i].getClicked())
                 playerTwoHolder.push(i);
             }    } 
-            if(turn >3){
+            if(turn >=3){
                 // CHECKS IF WON in findWinner 
             if(findWinner(playerOneHolder)){
                 player1.isWinner(); 
@@ -40,7 +40,7 @@ const displayController = (() =>{
                 bodyHTML.textContent = "Player 1 is Winner!";
                 gameBoard.restart();
             }
-            if(findWinner(playerTwoHolder)){
+            else if(findWinner(playerTwoHolder)){
                 player2.isWinner(); 
                 numberofwinsTwo.textContent =  `${player2.numberWins()}`;
                 setTimeout(() => {
@@ -63,6 +63,8 @@ const displayController = (() =>{
   
 const gameBoard = (() => {
     //a gameboard has 3 boxes that can be clicked
+    const board = [];
+   
 
     function boardBox(num,playerNum){
         let clicked = false;
@@ -83,10 +85,10 @@ const gameBoard = (() => {
         return {boxRow,setClickTrue,getClicked,getPlayerNum};        
     }
     // board contains the 9 box
-    const board = [];
-    
+ 
 function createBoard(){
-    for(let o =1; o<=3;o++)
+   
+    for(let o =1; o<=3;o++){
         for(let i = 0; i<3; i++){
                 if(o === 1){  
                     total = 0;  
@@ -99,31 +101,40 @@ function createBoard(){
                 total+=i;
                 board.push(boardBox(total));
             }
-}
+        }
+       
+    }
 function updateBoard(num,player){
         gameBoard.getBoard()[num].setClickTrue(player);
-}   
+    }   
 function getBoard(){
+    
     return board;
+  
 }
 
 function restart(){
+    if((bodyHTML.textContent === "")){
+        bodyHTML.textContent ="RESTARTING GAME!";
+    }
+    
     let ticButtons = document.querySelectorAll('button');
     turn=0;
 
     for(let i = 0; i<9; i++){
         board.pop();
-    }
+     
+    }  
     setTimeout(() => {
    
     for(const ticButton of ticButtons){
         ticButton.textContent='';
-        ticButton.removeEventListener('click', playGame);
+        // ticButton.removeEventListener('click', playGame);
     }
-    turn=1;
+  
     playerTwoHTML.classList.remove('active');
     playerOneHTML.classList.add('active');
-    createBoard();
+    bodyHTML.textContent = "";
    
 },1000);
   
@@ -161,6 +172,9 @@ const player = (number) =>{
         return wins;
     }
     return {getPlayerNumber,isWinner,numberWins};
+
+
+    
 }
 
 
@@ -179,31 +193,34 @@ let restartButton = document.querySelector('.restart');
 
 
 for(const ticButton of ticButtons){
-  
+
 ticButton.addEventListener('click', playGame);
 
 
 function playGame(){
-if(turn === 0){
 
-}else{
+if(turn === 0){
+    gameBoard.createBoard();
+    turn++
+}
+if(bodyHTML.textContent === ""){
     playerOneHTML.classList.remove('active');
    playerTwoHTML.classList.remove('active');
    var num = ticButton.id;
-   console.log(gameBoard.getBoard()[7].getClicked());
+
    if(gameBoard.getBoard()[num].getClicked()){
       
        turn--;
    }
 
   else if((turn % 2) === 0){
-   
+ 
    gameBoard.updateBoard(num,player1.getPlayerNumber());
    ticButton.textContent = player1.getPlayerNumber();
    playerOneHTML.classList.add('active');
     }
    else{
-       
+    
        gameBoard.updateBoard(num,player2.getPlayerNumber());
        ticButton.textContent = player2.getPlayerNumber();
        playerTwoHTML.classList.add('active');
@@ -215,12 +232,14 @@ if(turn === 0){
    if(turn === 10){
        setTimeout(() => {
            gameBoard.restart()
+           console.log('no turns left');
        },1000);
-       turn =1;
+       turn =0;
    }
   
 }}
 }
+
 function findWinner(playerHolder){
     for(let i = 0; i <7; i++){   
     //   checks row
@@ -248,6 +267,7 @@ function findWinner(playerHolder){
 
 restartButton.addEventListener('click', e =>{
 gameBoard.restart();
+console.log("restart button clicked");
 
     
 });
