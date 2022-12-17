@@ -7,10 +7,17 @@
     src: url('../fonts/Roboto-Bold.ttf');
     font-weight: bold;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
 :root{
     --ticHeight: 400px;
     --ticWidth: 200px;
     --ticborder: 5px solid rgb(117, 117, 117);
+}
+body{
+    margin: 0px;
 }
 .container{
     font-family: 'roboto',Arial, Helvetica, sans-serif;
@@ -19,6 +26,7 @@
     align-items: center;
     font-size: larger;
     font-weight: bold;
+ 
 }
 .header{
     display: flex;
@@ -29,7 +37,7 @@
 }
 .gamestats{
     height: 60px;
-    padding: 10px;
+    padding: 5px;
     display: flex;
     flex-direction: row;
   
@@ -108,4 +116,51 @@ p.player{
 p.active{
     box-shadow: 0.3em 0.2em 0.5em rgba(255, 124, 124, 0.8);
     border-top: none;;
+}
+
+
+p.winnertext{
+    margin: 2px;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    bottom: 50vh;
+    background-color: rgb(197, 234, 255);
+  
+    font-size: 3.5rem;
+   
+}
+
+p.result{
+  padding: 10px;
+  box-shadow: 0.3em 0.2em 0.5em rgba(0, 0, 0, 0.8);
+  border: 2px solid rgb(0, 0, 0);
+}
+
+a.git{
+  
+ 
+    vertical-align:middle;
+    color: white;
+    font-size: 30px;
+  
+}
+
+.empty{
+    min-height: 70px;
+}
+.foot{
+    display: flex;  
+    
+    width: 100vw;
+   
+    background-color: rgb(71, 71, 71);
+    
+    justify-content: center;
+    padding: 10px;
+
+}
+
+footer{
+
 }
