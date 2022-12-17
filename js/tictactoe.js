@@ -9,30 +9,7 @@
 const displayController = (() =>{
     //need to alternate between characters
     var turn = 1;
-    function findWinner(playerHolder){
-        for(let i = 0; i <7; i++){   
-        //   checks row
-            if((i%3) === 0 && playerHolder.includes(i) && 
-            playerHolder.includes(i+1) && playerHolder.includes(i+2)){
-                return true;
-            }
-            // checks col
-            if(playerHolder.includes(i) && 
-            playerHolder.includes(i+3) && playerHolder.includes(i+6)){
-                return true;
-            }
-            // check diagonal
-            if(playerHolder.includes(i) && 
-            playerHolder.includes(i+4) && playerHolder.includes(i+8)){
-                return true;
-            }
-            if(playerHolder.includes(2) && 
-            playerHolder.includes(4) && playerHolder.includes(6)){
-                return true;
-            }
-         
-    }     console.log(playerHolder);
-}
+    
     function findActiveLine(){
         let bodyHTML = document.querySelector('.winnertext');
         let numberofwinsOne = document.querySelector('.numberofwinsone');
@@ -57,19 +34,21 @@ const displayController = (() =>{
              
                 numberofwinsOne.textContent =  `${player1.numberWins()}`;
                 setTimeout(() => {
-                    gameBoard.restart();
+                    
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 1 is Winner!";
+                gameBoard.restart();
             }
             if(findWinner(playerTwoHolder)){
                 player2.isWinner(); 
                 numberofwinsTwo.textContent =  `${player2.numberWins()}`;
                 setTimeout(() => {
-                    gameBoard.restart()
+                   
                     bodyHTML.textContent ="";
                 },1000);
                 bodyHTML.textContent = "Player 2 is Winner!";
+                gameBoard.restart()
             }
            
             
@@ -95,6 +74,7 @@ const gameBoard = (() => {
 
         }
         function getClicked(){
+          
             return clicked;
         }
         function getPlayerNum(){
@@ -129,18 +109,27 @@ function getBoard(){
 
 function restart(){
     let ticButtons = document.querySelectorAll('button');
+    turn=0;
+
     for(let i = 0; i<9; i++){
         board.pop();
     }
+    setTimeout(() => {
+   
     for(const ticButton of ticButtons){
         ticButton.textContent='';
+        ticButton.removeEventListener('click', playGame);
     }
     turn=1;
     playerTwoHTML.classList.remove('active');
     playerOneHTML.classList.add('active');
     createBoard();
+   
+},1000);
+  
+
 }
-    return {updateBoard, getBoard, createBoard,restart};
+    return {board, updateBoard, getBoard, createBoard,restart};
 })();
 
 
@@ -187,47 +176,79 @@ let playerTwoHTML = document.getElementById("two");
 
 let restartButton = document.querySelector('.restart');
 //UPDATES BOARD UPON CLICK OF BUTTONS IN BROWSER. 
-for(const ticButton of ticButtons)
-ticButton.addEventListener('click',e =>{
+
+
+for(const ticButton of ticButtons){
+  
+ticButton.addEventListener('click', playGame);
+
+
+function playGame(){
+if(turn === 0){
+
+}else{
     playerOneHTML.classList.remove('active');
-    playerTwoHTML.classList.remove('active');
-    var num=  ticButton.id
-    if(gameBoard.getBoard()[num].getClicked()){
-       
-        turn--;
-    }
+   playerTwoHTML.classList.remove('active');
+   var num = ticButton.id;
+   console.log(gameBoard.getBoard()[7].getClicked());
+   if(gameBoard.getBoard()[num].getClicked()){
+      
+       turn--;
+   }
 
-   else if((turn % 2) === 0){
-    
-    gameBoard.updateBoard(num,player1.getPlayerNumber());
-    ticButton.textContent = player1.getPlayerNumber();
-    playerOneHTML.classList.add('active');
-     }
-    else{
-        
-        gameBoard.updateBoard(num,player2.getPlayerNumber());
-        ticButton.textContent = player2.getPlayerNumber();
-        playerTwoHTML.classList.add('active');
-    }
-    turn++;
-    ticButton.classList.add('clicked');
-    findActiveLine();
-    if(turn === 10){
-        setTimeout(() => {
-            gameBoard.restart()
-        },1000);
-        turn =1;
-    }
+  else if((turn % 2) === 0){
    
-
-
-});
-
-
-
+   gameBoard.updateBoard(num,player1.getPlayerNumber());
+   ticButton.textContent = player1.getPlayerNumber();
+   playerOneHTML.classList.add('active');
+    }
+   else{
+       
+       gameBoard.updateBoard(num,player2.getPlayerNumber());
+       ticButton.textContent = player2.getPlayerNumber();
+       playerTwoHTML.classList.add('active');
+   }
+   turn++;
+   ticButton.classList.add('clicked');
+    findActiveLine();
+    
+   if(turn === 10){
+       setTimeout(() => {
+           gameBoard.restart()
+       },1000);
+       turn =1;
+   }
+  
+}}
+}
+function findWinner(playerHolder){
+    for(let i = 0; i <7; i++){   
+    //   checks row
+        if((i%3) === 0 && playerHolder.includes(i) && 
+        playerHolder.includes(i+1) && playerHolder.includes(i+2)){
+            return true;
+        }
+        // checks col
+        if(playerHolder.includes(i) && 
+        playerHolder.includes(i+3) && playerHolder.includes(i+6)){
+            return true;
+        }
+        // check diagonal
+        if(playerHolder.includes(i) && 
+        playerHolder.includes(i+4) && playerHolder.includes(i+8)){
+            return true;
+        }
+        if(playerHolder.includes(2) && 
+        playerHolder.includes(4) && playerHolder.includes(6)){
+            return true;
+        }
+     
+}     
+}
 
 restartButton.addEventListener('click', e =>{
 gameBoard.restart();
+
     
 });
 
