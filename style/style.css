@@ -186,6 +186,12 @@ p.active{
     display: flex;
   
 }
+.clicked{
+    font-size: 6rem;
+   max-height: fit-content;
+   align-items: center;
+   
+}
 p.winnertext{
 
     font-size: 1.5rem;
