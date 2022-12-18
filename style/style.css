@@ -7,6 +7,7 @@
     src: url('../fonts/Roboto-Bold.ttf');
     font-weight: bold;
 }
+
 a{
     text-decoration: none;
     color: black;
@@ -54,7 +55,7 @@ body{
     margin-left: 50px;
     margin-right: 50px;
     display: flex;
-    flex-wrap: row;
+  
 }
 
 .col{
@@ -173,3 +174,31 @@ a.git{
 
 }
 
+@media screen and (max-width: 700px) {
+   
+p.active{
+    box-shadow: 0.3em 0.2em 0.5em rgba(255, 124, 124, 0.8);
+    border-top: none;;
+}
+.flexrow{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+  
+}
+p.winnertext{
+
+    font-size: 1.5rem;
+}
+    .col{
+  
+        display: grid;
+        height: calc(var(--ticHeight)/2.5);
+        width: calc(var(--ticWidth)/1.5);
+    }
+    button{
+        height: calc(var(--ticHeight)/2.5);
+        width: calc(var(--ticWidth)/1.5);
+        
+    }
+}
