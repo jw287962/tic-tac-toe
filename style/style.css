@@ -174,8 +174,13 @@ a.git{
 
 }
 
-@media screen and (max-width: 700px) {
-   
+@media screen and (max-width: 600px) {
+    .body{
+    
+        display: flex;
+        min-height: 450px;
+    
+    }
 p.active{
     box-shadow: 0.3em 0.2em 0.5em rgba(255, 124, 124, 0.8);
     border-top: none;;
@@ -199,12 +204,16 @@ p.winnertext{
     .col{
   
         display: grid;
-        height: calc(var(--ticHeight)/2.5);
-        width: calc(var(--ticWidth)/1.5);
+        height: calc(var(--ticHeight)/3);
+        width: calc(var(--ticWidth)/2);
+        
+        min-width: fit-content;
     }
     button{
-        height: calc(var(--ticHeight)/2.5);
-        width: calc(var(--ticWidth)/1.5);
-        
+        height: calc(var(--ticHeight)/3);
+        width: calc(var(--ticWidth)/2);
+        min-width: fit-content;
+        min-height: 100px;
     }
+
 }
