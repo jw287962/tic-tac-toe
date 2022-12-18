@@ -216,4 +216,12 @@ p.winnertext{
         min-height: 100px;
     }
 
+    .gamestats{
+        height: fit-content;
+                display: flex;
+        flex-direction: column;
+        
+      
+    }
+
 }
