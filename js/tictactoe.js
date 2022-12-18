@@ -167,7 +167,7 @@ const player = (number) =>{
     let winner = false;
         let wins = 0;
     const playerNumber = shape;
-  
+  //basically x is 1 
     function getPlayerShape(){
         return playerNumber;
     }
@@ -250,7 +250,7 @@ if(gameBoard.getBoard()[num].getClicked()){
     
     if(findActiveLine()){
         turn = 0;
-        console.log(turn);
+     
        
 
     } 
@@ -314,7 +314,7 @@ findActiveLine();
 
 function updateCurrentGame(player,num,ticButtonID){
     gameBoard.updateBoard(num,player.getPlayerShape());
-    if(ticButtonID){
+    if(ticButtonID){  
         ticButtonID.textContent = player.getPlayerShape();
         ticButtonID.classList.add('clicked');
     }else{
@@ -324,9 +324,13 @@ function updateCurrentGame(player,num,ticButtonID){
    
    
     if(player.getPlayerShape() === 'X'){
-        playerOneHTML.classList.add('active');   
-    }else{
         playerTwoHTML.classList.add('active');    
+        playerOneHTML.classList.remove('active');
+         
+    }else{
+        console.log('active');
+        playerOneHTML.classList.add('active');  
+        playerTwoHTML.classList.remove('active');
     }
 }
 
