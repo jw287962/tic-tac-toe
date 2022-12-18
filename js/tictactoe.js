@@ -230,20 +230,18 @@ function playGame(){
     }
 if(bodyHTML.textContent === ""){
  
-    playerOneHTML.classList.remove('active');
-   playerTwoHTML.classList.remove('active');
+   
    let num = ticButton.id;
 
    
 // if against AI
 
 if(gameBoard.getBoard()[num].getClicked()){
-   
+  
 }
 
   else if(player2.isAI()){
   
-    
     updateCurrentGame(player1,num);
 
  
