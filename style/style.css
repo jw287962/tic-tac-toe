@@ -174,7 +174,7 @@ a.git{
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
     .body{
     
         display: flex;
@@ -186,8 +186,8 @@ p.active{
     border-top: none;;
 }
 .flexrow{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
     display: flex;
   
 }
